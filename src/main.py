@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import psycopg2
 from search import pull
 import pandas as pd

@@ -15,4 +15,4 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 # Run app.py when the container launches
-CMD ["python", "main.py"]
+ENTRYPOINT ["python", "followers.py"]
