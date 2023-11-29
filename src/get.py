@@ -101,3 +101,5 @@ def get_paginated(
         # End if no more results
         if result_count_func(data) == 0:
             return
+        if data.error:
+            return

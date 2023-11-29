@@ -33,7 +33,7 @@ resource "google_compute_instance" "my_instance" {
 
     # Restart Docker to apply group membership changes
     sudo systemctl restart docker
-    sudo apt install python3-pip
+    sudo apt install python3-pip -y
     pip3 install pandas psycopg2-binary
   EOF
 }

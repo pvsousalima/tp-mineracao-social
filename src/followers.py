@@ -106,26 +106,32 @@ def extract_data(user, target, relationship_type):
     location = user.get("location", "")
     return {'username': username, 'location': location, 'relationship_type': relationship_type, 'target': target}
 
-# Assuming you have a DataFrame named df with columns: id, txt, username, udate, nickname, lang, detected_language, toxicity
-# Add more columns as needed
-df = pd.read_csv('./data/posts_with_detected_language.csv')
+# # Assuming you have a DataFrame named df with columns: id, txt, username, udate, nickname, lang, detected_language, toxicity
+# # Add more columns as needed
+# df = pd.read_csv('./data/posts_with_detected_language.csv')
 
-# Filter users with toxicity between 0.5 and 1 (inclusive)
-filtered_users = df[(df['toxicity'] >= 0.5) & (df['toxicity'] <= 1)]
+# # Filter users with toxicity between 0.5 and 1 (inclusive)
+# filtered_users = df[(df['toxicity'] >= 0.5) & (df['toxicity'] <= 1)]
 
-# Get the list of usernames from the filtered users
-toxic_users = list(set(filtered_users['username']))
+# # Get the list of usernames from the filtered users
+# toxic_users = list(set(filtered_users['username']))
 
-# Print or use the list of usernames as needed
-# print(toxic_users)
-print(len(toxic_users))
+# # Print or use the list of usernames as needed
+# # print(toxic_users)
+# print(len(toxic_users))
 
-# Initialize a list to store extracted data
+# # Initialize a list to store extracted data
 relationship_data = []
 
 # Extract data for followers
 for follower in pull_follow_relations(os.getenv('USERNAME'), 50, 'followers'):
     relationship_data.append(extract_data(follower, os.getenv('USERNAME'), 'follower'))
+
+for relationship in relationship_data:
+    print(relationship)
+    save_relationship(relationship)
+
+relationship_data = []
 
 # Extract data for following
 for following in pull_follow_relations(os.getenv('USERNAME'), 50, 'following'):
@@ -134,4 +140,3 @@ for following in pull_follow_relations(os.getenv('USERNAME'), 50, 'following'):
 for relationship in relationship_data:
     print(relationship)
     save_relationship(relationship)
-    
